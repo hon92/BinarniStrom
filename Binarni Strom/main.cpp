@@ -1,37 +1,24 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
 #include "binTree.h"
 
 using namespace std;
 
 int main()
 {
-	node *testNode = new node;
-	testNode->value = 10;
-	testNode->leftLeaf = NULL;
-	testNode->rightLeaf = NULL;
+	binTree *tree = new binTree();	
+	int myints[] = {1,2,3};
 
-	node *testNode2 = new node;
-	testNode2->value = 12;
-	testNode2->leftLeaf = NULL;
-	testNode2->rightLeaf = NULL;
+	sort(myints,myints+3);
 
-	node *testNode3 = new node;
-	testNode3->value = 8;
-	testNode3->leftLeaf = NULL;
-	testNode3->rightLeaf = NULL;
+	cout << "The 3! possible permutations with 3 elements:\n";
+	do {
+		cout << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
+	} while (next_permutation(myints,myints+3));
 
-	binTree *tree = new binTree(testNode);
-	// tree->getMainLeaf()->leftLeaf = testNode3;
-	// tree->getMainLeaf()->rightLeaf = testNode2;
-	tree->addNewLeaf(testNode2);
-	tree->addNewLeaf(testNode3);
+	cout << "After loop: " << myints[0] << ' ' << myints[1] << ' ' << myints[2] << '\n';
 
-	cout << tree->searchLeaf(10)->value << endl;
-	cout << tree->searchLeaf(12)->value << endl;
-	cout << tree->searchLeaf(8)->value << endl;
-
-	//cout << tree->searchLeaf(1000) << endl;
 
 	return 0;
 }

@@ -17,17 +17,20 @@ class binTree
 public:
 	// konstruktory
 	binTree(void);
-	binTree(node *mainLeaf);
+	binTree(uint value);
 	// destruktor
 	~binTree(void);
 	// metody
 	void setMainLeaf(node *mainLeaf){ this->mainLeaf = mainLeaf; }
 	node *getMainLeaf(void){ return (this->mainLeaf); }
 	
-	void addNewLeaf(node *leaf);
-	node *searchLeaf(uint leafValue);
+	void addNewLeafForValue(uint value);
+
+	void printTree(void);
+	uint countFactorial(uint value);
 
 private:
+	void printInOrder(node *mainNode);
 	node *mainLeaf;
 };
 

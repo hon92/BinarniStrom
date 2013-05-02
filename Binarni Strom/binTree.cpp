@@ -5,9 +5,14 @@ binTree::binTree(void)
 {
 	this->mainLeaf = NULL;
 }
-binTree::binTree(node *mainLeaf)
+binTree::binTree(uint value)
 {
-	this->setMainLeaf(mainLeaf);
+	node *tempNode = new node;
+	tempNode->value = value;
+	tempNode->leftLeaf = NULL;
+	tempNode->rightLeaf = NULL;
+
+	this->setMainLeaf(tempNode);
 }
 
 // destruktor
@@ -16,78 +21,78 @@ binTree::~binTree(void)
 }
 
 // pridani noveho prvku
-void binTree::addNewLeaf(node *leaf)
+void binTree::addNewLeafForValue(uint value)
 {
-	//node *foundNode = new node;
-	//foundNode = this->searchLeaf(leaf->value);
+	node *newNode = new node;
+	newNode->value = value;
+	newNode->leftLeaf = NULL;
+	newNode->rightLeaf = NULL;
 
-	//if(foundNode == NULL)
-	//{
-	//	foundNode = leaf;
-	//	return true;
-	//}
-	//else
-	//{
-	//	cout << "Tento prvek strom jiz obsahuje." << endl;
-	//	return false;
-	//}
-
-	node *tempNode = new node;
-	tempNode = this->getMainLeaf();
-
-	while(1)
+	node *tempNode = this->getMainLeaf();
+	
+	
+	if(tempNode == NULL)
 	{
-		if(leaf->value == tempNode->value)
+		this->setMainLeaf(newNode);
+	}
+	else
+	{
+		while(true)
 		{
-			cout << "Prvek uz je ve strome" << endl;
-		}
-		else
-		{
-			if(leaf->value < tempNode->value)
+			if(value == tempNode->value)
+			{
+				cout << "Prvek se jiz nachazi ve strome" << endl;
+				return;
+			}
+			if(value < tempNode->value)
 			{
 				if(tempNode->leftLeaf == NULL)
 				{
-					tempNode->leftLeaf = leaf;
 					break;
 				}
+				tempNode = tempNode->leftLeaf;
 			}
-			if(leaf->value > tempNode->value)
+			else
 			{
 				if(tempNode->rightLeaf == NULL)
 				{
-					tempNode->rightLeaf = leaf;
 					break;
 				}
+				tempNode = tempNode->rightLeaf;
 			}
+		}
+		if(value < tempNode->value)
+		{
+			tempNode->leftLeaf = newNode;
+		}
+		else
+		{
+			tempNode->rightLeaf = newNode;
 		}
 	}
 }
 
-// hledani ve strome
-node *binTree::searchLeaf(uint leafValue)
+void binTree::printInOrder(node *mainNode)
 {
-	node *tempNode = new node;
-	tempNode = this->getMainLeaf();
-
-	do
+	if(mainNode != NULL)
 	{
-		if(leafValue == tempNode->value)
-		{
-			return tempNode;
-		}
-		else
-		{
-			if(leafValue < tempNode->value)
-			{
-				tempNode = tempNode->leftLeaf;
-			}
-			if(leafValue > tempNode->value)
-			{
-				tempNode = tempNode->rightLeaf;
-			}
-		}
+		this->printInOrder(mainNode->leftLeaf);
+		cout << "Node value = " << mainNode->value << endl;
+		this->printInOrder(mainNode->rightLeaf);
 	}
-	while(tempNode != NULL);
+}
 
-	return tempNode;
+void binTree::printTree(void)
+{
+	printInOrder(this->getMainLeaf());
+}
+
+uint binTree::countFactorial(uint value)
+{
+	if(value == 0 || value == 1)
+	{
+		return 1;
+	}
+	value = this->countFactorial(value-1) * value;
+	return value;
 }
