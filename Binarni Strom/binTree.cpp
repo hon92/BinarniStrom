@@ -50,12 +50,10 @@ node *binTree::searchLeaf(uint leafValue)
 			if(leafValue < tempNode->value)
 			{
 				tempNode = tempNode->leftLeaf;
-				break;
 			}
 			if(leafValue > tempNode->value)
 			{
 				tempNode = tempNode->rightLeaf;
-				break;
 			}
 		}
 	}
