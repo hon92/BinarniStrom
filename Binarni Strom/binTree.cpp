@@ -12,14 +12,14 @@ binTree::binTree(uint value)
 	tempNode->value = value;
 	tempNode->leftLeaf = NULL;
 	tempNode->rightLeaf = NULL;
-
 	this->setMainLeaf(tempNode);
+	delete tempNode;
 }
 
 // destruktor
 binTree::~binTree(void)
 {
-	// this->deleteLeafs(this->getMainLeaf());
+	this->deleteLeafs(this->getMainLeaf());
 }
 
 // pridani noveho prvku
@@ -31,7 +31,6 @@ void binTree::addNewLeafForValue(uint value)
 	newNode->rightLeaf = NULL;
 
 	node *tempNode = this->getMainLeaf();
-	
 	
 	if(tempNode == NULL)
 	{
@@ -91,10 +90,19 @@ void binTree::printTree(void)
 
 void binTree::deleteLeafs(node *mainNode)
 {
-	if(this->getMainLeaf() != NULL)
+	if(mainNode != NULL)
 	{
 		this->deleteLeafs(mainNode->leftLeaf);
 		this->deleteLeafs(mainNode->rightLeaf);
 		delete mainNode;
 	}
+}
+
+uint binTree::heightOfTree(node *mainNode) 
+{
+	if (mainNode == NULL)
+	{
+		return 0;
+	}
+    return 1 + max(heightOfTree(mainNode->leftLeaf), heightOfTree(mainNode->rightLeaf));
 }

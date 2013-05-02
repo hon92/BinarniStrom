@@ -20,17 +20,18 @@ public:
 	binTree(uint value);
 	// destruktor
 	~binTree(void);
-	// metody
+	// public metody
 	void setMainLeaf(node *mainLeaf){ this->mainLeaf = mainLeaf; }
 	node *getMainLeaf(void){ return (this->mainLeaf); }
-	
 	void addNewLeafForValue(uint value);
-
 	void printTree(void);
+	uint binTree::heightOfTree(node *mainNode);
 
 private:
+	// private metody
 	void printInOrder(node *mainNode);
 	void deleteLeafs(node *mainNode);
+	// private promenna
 	node *mainLeaf;
 };
 
