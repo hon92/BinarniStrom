@@ -1,4 +1,5 @@
 #include "binTree.h"
+#include <algorithm>
 
 // konstruktory
 binTree::binTree(void)
@@ -18,6 +19,7 @@ binTree::binTree(uint value)
 // destruktor
 binTree::~binTree(void)
 {
+	// this->deleteLeafs(this->getMainLeaf());
 }
 
 // pridani noveho prvku
@@ -87,12 +89,12 @@ void binTree::printTree(void)
 	printInOrder(this->getMainLeaf());
 }
 
-uint binTree::countFactorial(uint value)
+void binTree::deleteLeafs(node *mainNode)
 {
-	if(value == 0 || value == 1)
+	if(this->getMainLeaf() != NULL)
 	{
-		return 1;
+		this->deleteLeafs(mainNode->leftLeaf);
+		this->deleteLeafs(mainNode->rightLeaf);
+		delete mainNode;
 	}
-	value = this->countFactorial(value-1) * value;
-	return value;
 }

@@ -27,10 +27,10 @@ public:
 	void addNewLeafForValue(uint value);
 
 	void printTree(void);
-	uint countFactorial(uint value);
 
 private:
 	void printInOrder(node *mainNode);
+	void deleteLeafs(node *mainNode);
 	node *mainLeaf;
 };
 
