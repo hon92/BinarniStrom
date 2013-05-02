@@ -22,21 +22,12 @@ int main()
 	testNode3->rightLeaf = NULL;
 
 	binTree *tree = new binTree(testNode);
+	// tree->getMainLeaf()->leftLeaf = testNode3;
+	// tree->getMainLeaf()->rightLeaf = testNode2;
+	tree->addNewLeaf(testNode2);
+	tree->addNewLeaf(testNode3);
 
-	// tree->addNewLeaf(testNode2);
-	// tree->addNewLeaf(testNode3);
-
-	node *hmm = tree->getMainLeaf();
-	hmm->leftLeaf = testNode3;
-	hmm->rightLeaf = testNode2;
-
-	cout << hmm->value << endl;
-	cout << hmm->leftLeaf->value << endl;
-	cout << hmm->rightLeaf->value << endl;
-
-	node *hmm2 = tree->searchLeaf(12);
-
-	cout << hmm2->value << endl;
+	cout << tree->searchLeaf(12)->value << endl;
 
 	return 0;
 }

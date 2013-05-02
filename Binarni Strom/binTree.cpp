@@ -39,21 +39,24 @@ node *binTree::searchLeaf(uint leafValue)
 	node *tempNode = new node;
 	tempNode = this->getMainLeaf();
 
-	for(int i = 0; tempNode != NULL; i++)
+	while(tempNode != NULL)
 	{
 		if(leafValue == tempNode->value)
 		{
-			tempNode = this->getMainLeaf();
 			return tempNode;
 		}
-		if(leafValue < tempNode->value)
+		else
 		{
-			tempNode = tempNode->leftLeaf;
-		}
-
-		if(leafValue > tempNode->value)
-		{
-			tempNode = tempNode->rightLeaf;
+			if(leafValue < tempNode->value)
+			{
+				tempNode = tempNode->leftLeaf;
+				break;
+			}
+			if(leafValue > tempNode->value)
+			{
+				tempNode = tempNode->rightLeaf;
+				break;
+			}
 		}
 	}
 	return tempNode;
