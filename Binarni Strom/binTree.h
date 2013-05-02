@@ -24,7 +24,7 @@ public:
 	void setMainLeaf(node *mainLeaf){ this->mainLeaf = mainLeaf; }
 	node *getMainLeaf(void){ return (this->mainLeaf); }
 	
-	bool addNewLeaf(node *leaf);
+	void addNewLeaf(node *leaf);
 	node *searchLeaf(uint leafValue);
 
 private:

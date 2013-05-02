@@ -27,10 +27,11 @@ int main()
 	tree->addNewLeaf(testNode2);
 	tree->addNewLeaf(testNode3);
 
+	cout << tree->searchLeaf(10)->value << endl;
 	cout << tree->searchLeaf(12)->value << endl;
 	cout << tree->searchLeaf(8)->value << endl;
 
-	cout << tree->searchLeaf(1000) << endl;
+	//cout << tree->searchLeaf(1000) << endl;
 
 	return 0;
 }

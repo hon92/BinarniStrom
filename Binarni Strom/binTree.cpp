@@ -16,20 +16,50 @@ binTree::~binTree(void)
 }
 
 // pridani noveho prvku
-bool binTree::addNewLeaf(node *leaf)
+void binTree::addNewLeaf(node *leaf)
 {
-	node *foundNode = new node;
-	foundNode = this->searchLeaf(leaf->value);
+	//node *foundNode = new node;
+	//foundNode = this->searchLeaf(leaf->value);
 
-	if(foundNode == NULL)
+	//if(foundNode == NULL)
+	//{
+	//	foundNode = leaf;
+	//	return true;
+	//}
+	//else
+	//{
+	//	cout << "Tento prvek strom jiz obsahuje." << endl;
+	//	return false;
+	//}
+
+	node *tempNode = new node;
+	tempNode = this->getMainLeaf();
+
+	while(1)
 	{
-		foundNode = leaf;
-		return true;
-	}
-	else
-	{
-		cout << "Tento prvek strom jiz obsahuje." << endl;
-		return false;
+		if(leaf->value == tempNode->value)
+		{
+			cout << "Prvek uz je ve strome" << endl;
+		}
+		else
+		{
+			if(leaf->value < tempNode->value)
+			{
+				if(tempNode->leftLeaf == NULL)
+				{
+					tempNode->leftLeaf = leaf;
+					break;
+				}
+			}
+			if(leaf->value > tempNode->value)
+			{
+				if(tempNode->rightLeaf == NULL)
+				{
+					tempNode->rightLeaf = leaf;
+					break;
+				}
+			}
+		}
 	}
 }
 
@@ -57,7 +87,7 @@ node *binTree::searchLeaf(uint leafValue)
 			}
 		}
 	}
-	while(tempNode->leftLeaf != NULL || tempNode->rightLeaf != NULL);
+	while(tempNode != NULL);
 
 	return tempNode;
 }
