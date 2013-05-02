@@ -39,7 +39,7 @@ node *binTree::searchLeaf(uint leafValue)
 	node *tempNode = new node;
 	tempNode = this->getMainLeaf();
 
-	while(tempNode != NULL)
+	while(tempNode->leftLeaf != NULL || tempNode->rightLeaf != NULL)
 	{
 		if(leafValue == tempNode->value)
 		{
