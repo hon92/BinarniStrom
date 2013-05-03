@@ -7,10 +7,14 @@
 using namespace std;
 
 void makePermutation(uint value, vector <uint> &saveVector);
+uint *saveFrequency(uint number, vector <uint> saveVector);
+void printTable(uint number, uint *field);
+uint factorial(uint number);
 
 int main()
 {
 	vector <uint> saveVector;
+	uint *field;
 
 	uint number;
 	cout << "Zadejte cislo pro n! permutaci" << endl;
@@ -18,11 +22,11 @@ int main()
 
 	makePermutation(number, saveVector);
 
-	uint saveVectorSize = saveVector.size();
-	for(uint i = 0; i < saveVectorSize; i++)
-	{
-		cout << saveVector[i] << endl;
-	}
+	field = saveFrequency(number, saveVector);
+	
+	printTable(number, field);
+
+	delete field;
 
 	return 0;
 }
@@ -45,4 +49,52 @@ void makePermutation(uint value, vector <uint> &saveVector)
 		delete tree;
 	}while(next_permutation(numbers,numbers+value));
 	delete []numbers;
+}
+
+uint *saveFrequency(uint number, vector <uint> saveVector)
+{
+	uint saveVectorSize = saveVector.size();
+
+	uint *field = new uint[number];
+	for(uint i = 0; i < number; i++)
+	{
+		field[i] = 0;
+	}
+
+	for(uint i = 0; i < number; i++)
+	{
+		for(uint j = 0; j < saveVectorSize; j++)
+		{
+			if(saveVector[j] == i+1)
+			{
+				field[i] = field[i] + 1;
+			}
+		}
+	}
+	return field;
+}
+
+void printTable(uint number, uint *field)
+{
+	cout << endl;
+	cout << "######################################################" << endl;
+	cout << "#" << endl;
+	cout << "# Pocet permutaci pro cislo " << number << " je " << factorial(number) << "." <<endl;
+	cout << "#" << endl;
+	for(int i = 0; i < number;i++)
+	{
+		cout << "# Cetnost pro vysku stromu " << i+1 << " je " << field[i] << "."<< endl;
+	}
+	cout << "#" << endl;
+	cout << "######################################################" << endl;
+	cout << endl;
+}
+
+uint factorial(uint number)
+{
+	if(number == 0 || number == 1)
+	{
+		return 1;
+	}
+	return factorial(number - 1) * number;
 }
